@@ -1,0 +1,108 @@
+# Write a module containing a single class TST that implements a trisection search tree that you can build, 
+# insert points into, search (find the node of a point if present), and query using the methods specified below.
+
+class TST:
+    
+    def __init__(self, key=None, child=None, parent=None):
+        
+        self.key = key # Stores key in the attribute of the same name
+        self.child = [None, None, None] # initializes attribute child
+        self. parent = None # initializes attribute parent
+        
+    def __str__(self): 
+        
+        return "[{}]".format(self.key)    
+
+    def __repr__(self): 
+        
+        return __str__(self)
+    
+    def set_left(self, other):
+        self.left = other
+        other.parent = self
+
+    def set_right(self, other):
+        self.right = other
+        other.parent = self
+        
+    def set_child(self, i, node): 
+        
+        if i < 0 or i >2: 
+            raise ValueError
+        else: 
+            child[i] == node
+            
+        if node is TST: 
+            parent == node
+            
+    def get_child(self, i):
+        
+        if i < 0 or i > 2:
+            raise ValueError
+        else: 
+            return self.get_child[i]
+
+    def insert(self, p): 
+        
+       if self.key == None:
+            self.key = p
+            return
+        if p <= self.key:
+            if self.left == None:
+                self.set_left(TST(key=p))
+            else:
+                self.left.insert(p)
+        else:
+            if self.right == None:
+                self.set_right(TST(key=p))
+            else:
+                self.right.insert(p)
+        
+    def search(self, p): 
+        
+        if self.key == None:
+            return None
+        if p == self.key:
+            return self
+        elif p < self.key:
+            if self.left == None:
+                return None
+            else:
+                return self.left.search(p)
+        elif self.key < p:
+            if self.right == None:
+                return None
+            else:
+                return self.right.search(p)
+            
+    def __contains__(self, p):
+        
+        if self.search(p):
+            return True
+        else: 
+            return False
+        
+    def __len__(self):
+        
+        if self.node == None: # if the key of the current node is none
+            return 0 
+        else: 
+            return 1 + __len__(node.left) + __len__(node.right) # returns number of nodes in tree
+        
+    def depth(self, start_node = None): 
+        
+        if start_node != None:
+            initial = self.search(start_node)
+            return initial.depth()
+
+        if self.left == None and self.right == None:
+            return 0
+
+        if self.right == None:
+            return self.left.depth() + 1 
+        elif self.left == None:
+            return self.right.depth() + 1 
+
+        else:
+            return max(self.left.depth(), self.right.depth()) + 1   
+        
